@@ -14,7 +14,8 @@ public class UserRole {
 
     @ManyToOne
     @JsonBackReference
+    @JoinColumn(name = "user_id")
     private User user;
 
-    private String role;
+    private String role; //admin, member
 }
