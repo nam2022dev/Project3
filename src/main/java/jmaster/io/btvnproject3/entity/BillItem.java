@@ -23,6 +23,5 @@ public class BillItem {
     private Product product;
 
     private int quantity;
-
     protected double price;
 }

@@ -1,5 +1,6 @@
 package jmaster.io.btvnproject3.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -30,4 +31,8 @@ public class Bill {
                 orphanRemoval = true)
     private List<BillItem> billItems;
 
+    @CreatedDate
+    @Column(updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private Date createAt;
 }

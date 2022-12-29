@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -23,4 +26,10 @@ public class UserDTO {
 
     @JsonIgnore
     private MultipartFile file;
+    private String avatar;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String roles;
+    private List<UserRoleDTO> userRoles;
 }
