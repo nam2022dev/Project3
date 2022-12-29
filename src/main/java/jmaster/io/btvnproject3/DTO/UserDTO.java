@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.List;
 
 @Data
 public class UserDTO {
@@ -30,6 +29,6 @@ public class UserDTO {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date createAt;
     private String roles;
-    private List<UserRoleDTO> userRoles;
 }

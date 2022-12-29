@@ -53,9 +53,6 @@ public class User {
     joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     private List<String> roles;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "user",
-            fetch = FetchType.EAGER)
-    private List<UserRole> userRoles;
+
 }
 

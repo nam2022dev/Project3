@@ -1,12 +1,11 @@
-package service;
+package jmaster.io.btvnproject3.service;
 
 import jmaster.io.btvnproject3.DTO.PageDTO;
-import jmaster.io.btvnproject3.DTO.UserDTO;
-import jmaster.io.btvnproject3.DTO.UserRoleDTO;
-import jmaster.io.btvnproject3.entity.User;
-import jmaster.io.btvnproject3.entity.UserRole;
+//import com.codede.project3.entity.UserRole;
 import jmaster.io.btvnproject3.repo.UserRepo;
-import jmaster.io.btvnproject3.repo.UserRoleRepo;
+//import com.codede.project3.repo.UserRoleRepo;
+import jmaster.io.btvnproject3.DTO.UserDTO;
+import jmaster.io.btvnproject3.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,26 +26,26 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-    @Autowired
-    UserRoleRepo userRoleRepo;
+//    @Autowired
+//    UserRoleRepo userRoleRepo;
 
-    @Transactional
-    public void create(UserDTO userDTO) {
-        User user = new ModelMapper().map(userDTO, User.class); // convert user với userdto
-        userRepo.save(user);
-
-        List<UserRoleDTO> userRoleDTOs = userDTO.getUserRoles();
-        for (UserRoleDTO userRoleDTO : userRoleDTOs) {
-            if (userRoleDTO.getRole() != null) {
-                //save to db
-                UserRole userRole = new UserRole();
-                userRole.setUser(user);
-                userRole.setRole(userRoleDTO.getRole());
-
-                userRoleRepo.save(userRole);
-            }
-        }
-    }
+//    @Transactional
+//    public void create(UserDTO userDTO) {
+//        User user = new ModelMapper().map(userDTO, User.class); // convert user với userdto
+//        userRepo.save(user);
+//
+//        List<UserRoleDTO> userRoleDTOs = userDTO.getUserRoles();
+//        for (UserRoleDTO userRoleDTO : userRoleDTOs) {
+//            if (userRoleDTO.getRole() != null) {
+//                //save to db
+//                UserRole userRole = new UserRole();
+//                userRole.setUser(user);
+//                userRole.setRole(userRoleDTO.getRole());
+//
+//                userRoleRepo.save(userRole);
+//            }
+//        }
+//    }
 
     @Transactional
     public void update(UserDTO userDTO) {
