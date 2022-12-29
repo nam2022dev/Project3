@@ -1,20 +1,28 @@
 package jmaster.io.btvnproject3.entity;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
 
-@Entity
+/**
+ * BillItem (id, Bill , Product , quantity, buyPrice) - mỗi billitem thuộc về 1 bill và 1 product
+ */
 @Data
+@Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Category {
+public class BillItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    @ManyToOne
+    private Bill bill;
+
+    @ManyToOne
+    private Product product;
+
+    private int quantity;
+
+    protected double price;
 }
