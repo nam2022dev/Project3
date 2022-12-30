@@ -18,6 +18,4 @@ public class Category {
 
     @NotBlank
     private String name;
-    @CreatedDate
-    private Date createAt;
 }

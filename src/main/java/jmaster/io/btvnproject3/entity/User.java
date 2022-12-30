@@ -32,22 +32,12 @@ public class User {
 
     @Column(unique = true)
     private String username;
-
     private String password;
-
     private String email;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthdate;
-
-    @JsonIgnore
-    @Transient
-    private MultipartFile file;
-
     @CreatedDate
+    @Column(updatable = false)
     private Date createAt;
-
     @ElementCollection
     @CollectionTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"))

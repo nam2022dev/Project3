@@ -52,8 +52,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public PageDTO<CategoryDTO> searchByName(String name, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public PageDTO<CategoryDTO> searchByName(String name, Pageable pageable) {
 
         Page<Category> pageRS = categoryRepo.searchByName("%" + name + "%", pageable);
 
@@ -74,8 +73,4 @@ public class CategoryService {
         return new ModelMapper().map(category, CategoryDTO.class);
     }
 
-    public PageDTO<CategoryDTO> searchByName(String name, Pageable pageable) {
-        categoryRepo.searchByName(name, pageable);
-        return null;
-    }
 }

@@ -25,14 +25,7 @@ public class Product {
     private String description;
     private double price;
     @CreatedDate
-
-    @JsonIgnore
-    @Transient
-    private MultipartFile file;
-
-    @CreatedDate
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date createAt;
-    @OneToOne
+    @ManyToOne
     private Category category;
 }

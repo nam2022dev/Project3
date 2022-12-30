@@ -23,16 +23,10 @@ public class Bill {
     @CreatedDate
     @Column(updatable = false)
     private Date buyDate;
-
     @ManyToOne
     private User user;
 
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL,
                 orphanRemoval = true)
     private List<BillItem> billItems;
-
-    @CreatedDate
-    @Column(updatable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private Date createAt;
 }
