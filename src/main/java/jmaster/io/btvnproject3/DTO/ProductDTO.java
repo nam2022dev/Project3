@@ -13,22 +13,15 @@ import java.util.Date;
 @Data
 public class ProductDTO {
     private Integer id;
-
     @NotBlank
     private String name;
-
     private String image;
-
     @Min(0)
     private double price;
-
     private String description;
-
     @JsonIgnore
     private MultipartFile file;
-
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date createAt;
-
     private Category category;
 }

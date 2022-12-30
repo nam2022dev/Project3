@@ -16,6 +16,7 @@ public class UserDTO {
 
     @NotBlank
     private String name;
+    private String avatar;
     private String username;
     private String password;
     private String email;
@@ -25,10 +26,8 @@ public class UserDTO {
 
     @JsonIgnore
     private MultipartFile file;
-    private String avatar;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date createAt;
     private String roles;
 }

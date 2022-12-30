@@ -7,6 +7,8 @@ import jmaster.io.btvnproject3.repo.UserRepo;
 import jmaster.io.btvnproject3.DTO.UserDTO;
 import jmaster.io.btvnproject3.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,28 +28,16 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-//    @Autowired
-//    UserRoleRepo userRoleRepo;
-
-//    @Transactional
-//    public void create(UserDTO userDTO) {
-//        User user = new ModelMapper().map(userDTO, User.class); // convert user với userdto
-//        userRepo.save(user);
-//
-//        List<UserRoleDTO> userRoleDTOs = userDTO.getUserRoles();
-//        for (UserRoleDTO userRoleDTO : userRoleDTOs) {
-//            if (userRoleDTO.getRole() != null) {
-//                //save to db
-//                UserRole userRole = new UserRole();
-//                userRole.setUser(user);
-//                userRole.setRole(userRoleDTO.getRole());
-//
-//                userRoleRepo.save(userRole);
-//            }
-//        }
-//    }
 
     @Transactional
+    @CacheEvict(cacheNames = "category-search", allEntries = true)
+    public void create(UserDTO userDTO) {
+        User user = new ModelMapper().map(userDTO, User.class);
+        userRepo.save(user);
+    }
+
+    @Transactional
+    @Cacheable(cacheNames = "categories", key = "#id")
     public void update(UserDTO userDTO) {
         User user = userRepo.findById(userDTO.getId()).orElseThrow(RuntimeException::new);
 
@@ -55,6 +45,8 @@ public class UserService {
         user.setBirthdate(userDTO.getBirthdate());
         user.setName(userDTO.getName());
         user.setAvatar(userDTO.getAvatar());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
 
         userRepo.save(user);
     }
