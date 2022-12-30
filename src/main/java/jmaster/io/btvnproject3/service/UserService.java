@@ -9,6 +9,7 @@ import jmaster.io.btvnproject3.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.modelmapper.ModelMapper;
 import javax.persistence.NoResultException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,14 +32,15 @@ public class UserService {
 
 
     @Transactional
-    @CacheEvict(cacheNames = "category-search", allEntries = true)
-    public void create(UserDTO userDTO) {
+    @CacheEvict(cacheNames = "user-search", allEntries = true)
+    public UserDTO create(UserDTO userDTO) {
         User user = new ModelMapper().map(userDTO, User.class);
         userRepo.save(user);
+        return userDTO;
     }
 
     @Transactional
-    @Cacheable(cacheNames = "categories", key = "#id")
+    @Cacheable(cacheNames = "users", key = "#id")
     public void update(UserDTO userDTO) {
         User user = userRepo.findById(userDTO.getId()).orElseThrow(RuntimeException::new);
 
@@ -52,7 +55,8 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO getById(int id) {
+    @Cacheable(cacheNames = "users", key = "#id", unless = "#result == null")
+    public UserDTO findById(int id) {
         User user = userRepo.findById(id).orElseThrow(NoResultException::new);
 
         UserDTO userDTO = new ModelMapper().map(user, UserDTO.class);
@@ -75,14 +79,15 @@ public class UserService {
         return pageDTO;
     }
 
+    @Caching(evict = {@CacheEvict(cacheNames = "users", key = "#id"),
+            @CacheEvict(cacheNames = "user-search", allEntries = true)
+    })
     public void delete(int id) {
         userRepo.deleteById(id);
     }
 
     @Transactional
-    public PageDTO<UserDTO> searchByName(String name, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-
+    public PageDTO<UserDTO> searchByName(String name, Pageable pageable) {
         Page<User> pageRS = userRepo.findByNameLikeIgnoreCase(name, pageable);
 
         PageDTO<UserDTO> pageDTO = new PageDTO<>();
@@ -97,9 +102,7 @@ public class UserService {
     }
 
     @Transactional
-    public PageDTO<UserDTO> searchByBirthdate(ZonedDateTime birthdate, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-
+    public PageDTO<UserDTO> searchByBirthdate(Date birthdate, Pageable pageable) {
         Page<User> pageRS = userRepo.findByBirthdate(birthdate, pageable);
 
         PageDTO<UserDTO> pageDTO = new PageDTO<>();

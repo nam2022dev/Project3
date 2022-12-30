@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 public interface UserRepo extends JpaRepository<User, Integer>, Repository<User, Integer> {
     Page<User> findByNameLikeIgnoreCase(String name, Pageable pageable);
 
-    Page<User> findByBirthdate(ZonedDateTime birthdate, Pageable pageable);
+    Page<User> findByBirthdate(Date birthdate, Pageable pageable);
 
 }

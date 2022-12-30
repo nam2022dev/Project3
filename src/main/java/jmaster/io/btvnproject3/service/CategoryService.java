@@ -1,16 +1,15 @@
 package jmaster.io.btvnproject3.service;
 
-import jmaster.io.btvnproject3.DTO.PageDTO;
-import jmaster.io.btvnproject3.repo.CategoryRepo;
 import jmaster.io.btvnproject3.DTO.CategoryDTO;
+import jmaster.io.btvnproject3.DTO.PageDTO;
 import jmaster.io.btvnproject3.entity.Category;
+import jmaster.io.btvnproject3.repo.CategoryRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +45,6 @@ public class CategoryService {
     @Caching(evict = {@CacheEvict(cacheNames = "categories", key = "#id"),
                         @CacheEvict(cacheNames = "category-search", allEntries = true)
     })
-
     public void delete(int id) {
         categoryRepo.deleteById(id);
     }
