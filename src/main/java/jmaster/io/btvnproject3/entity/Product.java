@@ -1,6 +1,5 @@
 package jmaster.io.btvnproject3.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,6 +25,8 @@ public class Product {
     private double price;
     @CreatedDate
     private Date createAt;
+    @Transient
+    private MultipartFile file;
     @ManyToOne
     private Category category;
 }

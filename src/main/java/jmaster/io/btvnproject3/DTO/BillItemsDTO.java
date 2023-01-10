@@ -1,7 +1,6 @@
 package jmaster.io.btvnproject3.DTO;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jmaster.io.btvnproject3.entity.Product;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -14,11 +13,11 @@ public class BillItemsDTO {
     @JsonBackReference
     private BillDTO billDTO;
 
-    private Product product;
+    private ProductDTO product;
 
     @Min(0)
     private int quantity;
 
     @Min(0)
-    protected double buyPrice;
+    protected double price;
 }

@@ -26,7 +26,7 @@ public class User {
     private Integer id;
 
     @NotBlank
-    private String name;
+        private String name;
 
     private String avatar;
 
@@ -34,11 +34,18 @@ public class User {
     private String username;
     private String password;
     private String email;
+
+    @Transient // bo qua, ko gen vao table
+    private MultipartFile file;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthdate;
     @CreatedDate
     @Column(updatable = false)
     private Date createAt;
-    @ElementCollection
+
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")

@@ -1,4 +1,4 @@
-//package com.codede.project3.entity;
+//package jmaster.io.btvnproject3.entity;
 //
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 //import lombok.Data;

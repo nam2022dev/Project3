@@ -52,7 +52,7 @@ public class CategoryService {
     @Transactional
     public PageDTO<CategoryDTO> searchByName(String name, Pageable pageable) {
 
-        Page<Category> pageRS = categoryRepo.searchByName("%" + name + "%", pageable);
+        Page<Category> pageRS = categoryRepo.findByNameLike("%" + name + "%", pageable);
 
         PageDTO<CategoryDTO> pageDTO = new PageDTO<>();
         pageDTO.setTotalPage(pageRS.getTotalPages());

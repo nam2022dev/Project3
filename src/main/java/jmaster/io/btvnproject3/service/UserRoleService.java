@@ -1,11 +1,12 @@
-//package com.codede.project3.service;
+//package jmaster.io.btvnproject3.service;
 //
-//import com.codede.project3.DTO.UserDTO;
-//import com.codede.project3.DTO.UserRoleDTO;
-//import com.codede.project3.entity.User;
-//import com.codede.project3.entity.UserRole;
-//import com.codede.project3.repo.UserRepo;
-//import com.codede.project3.repo.UserRoleRepo;
+//
+//import jmaster.io.btvnproject3.DTO.UserDTO;
+//import jmaster.io.btvnproject3.DTO.UserRoleDTO;
+//import jmaster.io.btvnproject3.entity.User;
+//import jmaster.io.btvnproject3.entity.UserRole;
+//import jmaster.io.btvnproject3.repo.UserRepo;
+//import jmaster.io.btvnproject3.repo.UserRoleRepo;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;

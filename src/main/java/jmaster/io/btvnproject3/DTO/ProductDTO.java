@@ -21,7 +21,7 @@ public class ProductDTO {
     private String description;
     @JsonIgnore
     private MultipartFile file;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date createAt;
     private Category category;
 }
